@@ -100,7 +100,7 @@ func main() {
 		fmt.Println("Number: " + number)
 		fmt.Println(fmt.Sprint("Sum: ", sum))
 		dat := time.Now()
-		fmt.Println(fmt.Sprint("Data: ", dat))
+		fmt.Printf("Data: %02d.%02d.%d %02d:%02d\n", dat.Day(), dat.Month(), dat.Year(), dat.Hour(), dat.Minute())
 		fmt.Println("OperationStatus: Successfull")
 		fmt.Println("----------------------------------------------")
 
