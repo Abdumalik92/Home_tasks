@@ -98,7 +98,7 @@ func main() {
 		fmt.Println("----------------------------------------------")
 		fmt.Println("Operator: " + operator)
 		fmt.Println("Number: " + number)
-		fmt.Println(fmt.Sprint("Sum: ", sum))
+		fmt.Printf("Sum: %.2f\n", sum)
 		dat := time.Now()
 		fmt.Printf("Data: %02d.%02d.%d %02d:%02d\n", dat.Day(), dat.Month(), dat.Year(), dat.Hour(), dat.Minute())
 		fmt.Println("OperationStatus: Successfull")
