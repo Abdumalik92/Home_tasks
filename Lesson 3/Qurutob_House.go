@@ -16,8 +16,10 @@ func main() {
 	var cardNumber string
 	var pinCode string
 	var total float64
-	var s float64
 
+	var h string
+
+	var cardCrypt string
 	for !exitQurutobHouse {
 		var foodIDCheck bool
 		var portionCheck bool
@@ -27,13 +29,14 @@ func main() {
 		var foodName string
 		var cardNumberCheck bool
 		var pinCodeCheck bool
+
 		cur, err := user.Current()
 		if err != nil {
 			log.Fatal(err)
 		}
 		fmt.Println("Our waiter ", cur.Username, " will be serving you")
-		PrintMainScreen()
 
+		PrintMainScreen()
 		for !foodIDCheck {
 			fmt.Scan(&foodID)
 
@@ -65,8 +68,7 @@ func main() {
 				fmt.Println("Please, enter right portion")
 			}
 		}
-		s = portion
-
+		s := portion
 		for !typeOfPayment {
 			fmt.Println("Choose type of payment: ")
 			fmt.Println("1 - Cashless ")
@@ -137,20 +139,35 @@ func main() {
 				fmt.Println("Please, enter right type of paymant")
 			}
 		}
-		fmt.Println("----------------------------------------------")
-		var h string
 		h = fmt.Sprint("Total : ", foodName, " x ", portion, " = ", total)
-		fmt.Println(h)
-		dat := time.Now()
-		fmt.Printf("Data: %02d.%02d.%d %02d:%02d:%02d\n", dat.Day(), dat.Month(), dat.Year(), dat.Hour(), dat.Minute(), dat.Second())
-		fmt.Println("Casher ", cur.Username, " served for you")
-		fmt.Println("OperationStatus: Successfull")
-		fmt.Println("----------------------------------------------")
+		cardCrypt = cardNumber[1:7] + "********" + cardNumber[14:16]
+		fmt.Println(len(cardCrypt))
+		if paymant == 1 {
+			fmt.Println("----------------------------------------------")
+			fmt.Println(h)
+			fmt.Println("Card Number: ", cardCrypt)
+			dat := time.Now()
+			fmt.Printf("Data: %02d.%02d.%d %02d:%02d:%02d\n", dat.Day(), dat.Month(), dat.Year(), dat.Hour(), dat.Minute(), dat.Second())
+			fmt.Println("Casher ", cur.Username, " served for you")
+			fmt.Println("OperationStatus: Successfull")
+			fmt.Println("Thanks for your order")
+			fmt.Println("----------------------------------------------")
+		} else {
+			fmt.Println("----------------------------------------------")
+			fmt.Println(h)
+			dat := time.Now()
+			fmt.Printf("Data: %02d.%02d.%d %02d:%02d:%02d\n", dat.Day(), dat.Month(), dat.Year(), dat.Hour(), dat.Minute(), dat.Second())
+			fmt.Println("Casher ", cur.Username, " served for you")
+			fmt.Println("OperationStatus: Successfull")
+			fmt.Println("Thanks for your order")
+			fmt.Println("----------------------------------------------")
+		}
 		hash := md5.New()
 		b := []byte(h)
 		fmt.Printf("%x\n", hash.Sum(b))
 		hash.Write(b)
 		fmt.Printf("%x\n", hash.Sum(nil))
+
 		fmt.Println("esc- to go exit, back - to go to terminal")
 
 		for !commandCheck {
