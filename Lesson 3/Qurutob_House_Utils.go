@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os/user"
 	"strings"
+	"unicode"
 )
 
 func PrintMainScreen() {
 	fmt.Println("Welcome to our Qurutob House")
-	
+
 	fmt.Println("What kind of food do you eat")
 	fmt.Println("1 - Qurutob")
 	fmt.Println("2 - Qurutob with meet")
@@ -31,42 +30,42 @@ func CheckFood(foodID int, portion float64) bool {
 
 	a := fmt.Sprintf("%.1f", portion)
 	prePortion := foodPortion[foodID]
-	arrPortion := strings.Split(prePortion, ",")
+	arrPortion := strings.Split(prePortion, ", ")
 
 	for _, _portionValue := range arrPortion {
 
-		fmt.Println(_portionValue)
 		if a == _portionValue {
 			return true
 		}
-		fmt.Println(a)
+
 	}
 	return checkPortion
 }
 
 func cashlessPaymantCardNumber(cardNumber string) bool {
-	var checkCardNumber bool
-	/*for _, digitCard := range cardNumber {
+	var checkCardNumberF bool
+	for _, digitCard := range cardNumber {
 		if !unicode.IsNumber(digitCard) {
 			return false
 		}
-	}*/
-	fmt.Println(checkCardNumber)
-	if len(cardNumber) != 16 {
-		return false
 	}
-	fmt.Println(checkCardNumber == true)
-	return checkCardNumber
+
+	if len(cardNumber) == 16 {
+		return true
+	}
+
+	return checkCardNumberF
+
 }
 func cashlessPaymantPinCode(pinCode string) bool {
-	var checkPinCode bool
-	/*for _, digitPin := range pinCode {
+	var checkPinCodeF bool
+	for _, digitPin := range pinCode {
 		if !unicode.IsNumber(digitPin) {
-			checkPinCode = false
+			return false
 		}
-	}*/
-	if len(pinCode) != 4 {
-		checkPinCode = false
 	}
-	return checkPinCode
+	if len(pinCode) == 4 {
+		return true
+	}
+	return checkPinCodeF
 }
